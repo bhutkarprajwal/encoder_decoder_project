@@ -1,10 +1,22 @@
-# Encoder/Decoder Implementation Task
+# Encoding and Decoding Functions
 
-## Overview
-This project contains an encoder and decoder that serialize data structures into deterministic octet sequences and deserialize them back, following the provided specification.
+This project includes functions to encode and decode data structures efficiently.
 
-## How to Run Tests
-Run unit tests to verify the correctness of the encoder and decoder logic:
+## `encode(data)`
+Encodes various data types into a byte array:
+- `None` → Encoded as `0x00`
+- `bytes` → Length-prefixed byte array
+- `int` → Little-endian 2-byte representation
+- `list` → Encoded with length and individual items
+- `dict` → Encoded with key-value pairs
 
-```bash
-python test_encoder_decoder.py
+## `decode(data)`
+Decodes a byte array into its original data structure using a marker-based format.
+
+## Example Usage
+```python
+encoded_data = encode({"name": "Alice", "scores": [85, 90, 78]})
+decoded_data = decode(encoded_data)
+print(decoded_data)  # {'name': 'Alice', 'scores': [85, 90, 78]}
+```
+
